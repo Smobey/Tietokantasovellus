@@ -1,5 +1,4 @@
 Tietokantasovellus
 ==================
 
-Keskustelufoorumi
-Asdasd
+Ei mitään sanottavaa vielä.
