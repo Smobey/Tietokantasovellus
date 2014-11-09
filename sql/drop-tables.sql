@@ -1,0 +1,4 @@
+DROP TABLE Users;
+DROP TABLE Thread;
+DROP TABLE Message;
+DROP TABLE Tag;
