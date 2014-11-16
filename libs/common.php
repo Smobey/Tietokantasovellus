@@ -5,11 +5,3 @@ function showView($sivu, $data = array())
 	require 'views/template.php';
 	exit();
 }
-
-function loggedIn()
-{
-	if (isset($_SESSION['user'])
-		return true;
-	else
-		return false;
-}
