@@ -7,14 +7,15 @@ $error=$_GET['error'];
 
 if($error == 1)
 {
+	$username = $_POST["username"];
+	$password = $_POST["password"];
+	
 	if (empty($_POST["username"])) 
 	{
 		showView("login_view.php", array(
 		'error' => "Login failed! You did not provide a username.",
 		));
 	}
-
-	$username = $_POST["username"];
 
 	if (empty($_POST["password"])) 
 	{
@@ -23,19 +24,11 @@ if($error == 1)
 		'error' => "Login failed! You did not provide a password.",
 		));
 	}
-	
-	$password = $_POST["password"];
 
 	if (User::findUser($username, $password))
 	{
 		$user = User::findUser($username, $password);
 		$_SESSION['user'] = $user;
-
-		/*showView("login_view.php", array(
-		'username' => $username,
-		'error' => $_SESSION['user']->getId(),
-		));*/
-		
 		header('Location: index.php');
 	} 
 	else 

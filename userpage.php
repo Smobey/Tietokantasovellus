@@ -1,79 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<title>Foorumi</title>
-<link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-
-<div class="titlewrapper">
-	<div class="title">
-		Foorumi
-	</div>
-
-	<div class="useroptions">
-		Signed in as:<br>
-		Admin<br>
-		<br>
-		<a href="">Log out</a><br>
-		<a href="userpage.php?id=1">My profile</a>
-	</div>
-</div>
-
-<div class="menu">
-	<a href="index.php">Back to Index</a> | 
-	<a href="userlist.php">User List</a>
-</div>
-
-<div class="inputblock">
 <?php
-$id=$_GET['id'];
 
-if($id == 1)
+require_once 'libs/common.php';
+require_once 'libs/user.php';
+session_start();
+
+$user = User::findById($_GET['id']);
+
+if($_GET['action'] == 'commit')
 {
-	echo '
-		<b>Private email:</b> <input type="text" name="privateemail" value="admin@bunbunmaru.com"><br>
-		<b>Public email:</b> <input type="text" name="publicemail" value="admin@bunbunmaru.com"><br>
-		<b>Information:</b> <input type="text" name="information" value="HTML5 valid!"><br>
-		<b>Group:</b> Administrator<br>
-		<br>
-		<b>Change Group (admin only):</b><br>
-		<select>
-			<option value="volvo">User</option>
-			<option value="saab">Moderator</option>
-			<option value="mercedes">Administrator</option>
-		</select><br>
-		<br>
-		<button type="button">Commit</button>
-	';
+	if (isset($_SESSION['user']) && $user->getId() != $_SESSION['user']->getId())
+	{
+		showView("userpage_view.php", array(
+		'error' => "Don't even try.",
+		'user' => $user
+		));
+	}
+	
+	elseif (empty($_POST["privemail"])) 
+	{
+		showView("userpage_view.php", array(
+		'error' => "Error: You must provide a private email address.",
+		'user' => $user
+		));
+	}
+	
+	elseif (strlen($_POST["privemail"]) > 60 || strlen($_POST["pubemail"]) > 60) 
+	{
+		showView("userpage_view.php", array(
+		'error' => "Error: Your email address must be 60 characters or less.",
+		'user' => $user
+		));
+	}
+	
+	elseif (strlen($_POST["information"]) > 300) 
+	{
+		showView("userpage_view.php", array(
+		'error' => "Error: Your information must be 300 characters or less.",
+		'user' => $user
+		));
+	}
+	
+	
+	else
+	{
+		$user->setPrivEmail(htmlspecialchars($_POST["privemail"]));
+		$user->setPubEmail(htmlspecialchars($_POST["pubemail"]));
+		$user->setUserinfo(htmlspecialchars($_POST["information"]));
+		$user->setUsergroup($_POST["usergroup"]);
+		
+		$user->updateInfo();
+		
+		$_SESSION['user'] = $user;
+			
+		$_SESSION['notification'] = "Changes successful!";
+	}
 }
 
-elseif($id == 2)
+elseif($_GET['action'] == 'changegroup')
 {
-	echo '
-		<b>Public email:</b> bethanym@gmail.com<br>
-		<b>Information:</b> "I am BethanyM!"<br>
-		<b>Group:</b> User<br>
-		<br>
-		<b>Change Group (admin only):</b><br>
-		<select>
-			<option value="volvo">User</option>
-			<option value="saab">Moderator</option>
-			<option value="mercedes">Administrator</option>
-		</select><br>
-		<br>
-		<button type="button">Commit</button>
-	';
+	$user->setUsergroup($_POST["usergroup"]);
+	
+	$user->updateInfo();
+		
+	$_SESSION['notification'] = "Changes successful!";
 }
 
-else
-{
-	echo '
-		<b>Incorrect profile ID!</b>
-	';
-}
-?>
-</div>
-</body>
-</html>
+showView("userpage_view.php", array('user' => $user));

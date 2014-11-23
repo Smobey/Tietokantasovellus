@@ -27,15 +27,27 @@ session_start();
 	}
 	else
 	{
-		echo '<a href="login.php">Log in</a><br>';
+		echo '<a href="login.php">Log in</a><br>
+		<a href="register.php">Register</a><br>';
 	}
 	?>
 	</div>
 </div>
 
 <?php if (!empty($data->error)): ?>
-<div class="alert alert-danger"><?php echo $data->error; ?></div>
+<div class="alert alert-danger"> <?php
+echo $data->error;
+//print_r ($data->error);
+?><br><br></div>
 <?php endif; ?>
+<?php if (!empty($_SESSION['notification'])): ?>
+  <div class="alert alert-danger">
+    <?php echo $_SESSION['notification']; ?>
+  </div><br><br>
+<?php
+  unset($_SESSION['notification']); 
+  endif;
+?>
 
 <?php 
 require 'views/'.$sivu; 
