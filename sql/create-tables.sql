@@ -32,7 +32,6 @@ PRIMARY KEY(MessageID),
 Message TEXT(1000) not null,
 Thread INT unsigned not null,
 Creator INT unsigned not null,
-Lastpost DATETIME not null,
 Deleted TINYINT(1) not null,
 Postdate DATETIME not null
 );

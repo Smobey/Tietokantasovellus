@@ -37,7 +37,7 @@ session_start();
 <?php if (!empty($data->error)): ?>
 <div class="alert alert-danger"> <?php
 echo $data->error;
-//print_r ($data->error);
+print_r ($_SESSION['notification']);
 ?><br><br></div>
 <?php endif; ?>
 <?php if (!empty($_SESSION['notification'])): ?>

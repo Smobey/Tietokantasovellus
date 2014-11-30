@@ -357,3 +357,81 @@ VALUES
 '0',
 '2014-11-23'
 );
+
+INSERT INTO Users (Username, Password, PrivEmail, PubEmail, Userinfo, Usergroup, Joindate)
+VALUES
+(
+'Testuser_15',
+'password',
+'test_15@bunbunmaru.com',
+'test_15@bunbunmaru.com',
+'',
+'0',
+'2014-11-23'
+);
+
+INSERT INTO Thread (ThreadID, Title, Tag1, Creator, Messagecount, Lastpost)
+VALUES
+(
+'1',
+'Test',
+'1',
+'1',
+'1',
+'2014-11-30'
+);
+
+INSERT INTO Thread (ThreadID, Title, Tag1, Creator, Messagecount, Lastpost)
+VALUES
+(
+'2',
+'Test 2',
+'1',
+'2',
+'1',
+'2014-11-30'
+);
+
+INSERT INTO Message (MessageID, Message, Thread, Creator, Lastpost, Deleted, Postdate)
+VALUES
+(
+'1',
+'Testing testy tests',
+'1',
+'1',
+'2014-11-30',
+'0',
+'2014-11-30'
+);
+
+INSERT INTO Message (MessageID, Message, Thread, Creator, Lastpost, Deleted, Postdate)
+VALUES
+(
+'2',
+'Testing testy tests 2',
+'1',
+'3',
+'2014-11-30',
+'0',
+'2014-11-30'
+);
+
+INSERT INTO Message (MessageID, Message, Thread, Creator, Lastpost, Deleted, Postdate)
+VALUES
+(
+'3',
+'Aflong aflongkong',
+'2',
+'2',
+'2014-11-30',
+'0',
+'2014-11-30'
+);
+
+INSERT INTO Tag (TagID, Tagname, Tagdescription)
+VALUES
+(
+'1',
+'General',
+'Just regular stuff you know'
+);

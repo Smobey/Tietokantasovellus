@@ -1,0 +1,107 @@
+body {
+	max-width: 1200px;
+	min-width: 600px;
+	margin-top: 30px;
+	margin-left: 1%;
+	background-color: #FCFCFC;
+}
+
+.titlewrapper {
+	padding-bottom: 120px;
+}
+
+.title {
+	float: left;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.useroptions {
+	font-size: 12px;
+	float: right;
+}
+
+.menu {
+	float: left;
+	font-size: 20px;
+	padding-bottom: 10px;
+}
+
+.menuitem{
+	float: left;
+}
+
+.threads {
+	padding-bottom: 30px;
+}
+
+.pageswitch {
+
+}
+
+#forumtable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#forumtable td, #forumtable th {
+    font-size: 1em;
+    border: 1px solid #CACACA;
+    padding: 3px 7px 2px 7px;
+}
+
+#forumtable th {
+    font-size: 1.1em;
+    text-align: left;
+    padding-top: 5px;
+    padding-bottom: 4px;
+    background-color: #ABABAB;
+    color: #ffffff;
+}
+
+#forumtable tr.alt td {
+    color: #000000;
+    background-color: #CACACA;
+}
+
+#threadtable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#threadtable td, #threadtable th {
+    border: 1px solid #CACACA;
+    padding: 3px 7px 2px 7px;
+}
+
+#threadtable th {
+	font-size: 14px;
+    text-align: left;
+    padding: 3px 7px 2px 7px;
+    background-color: #ABABAB;
+    color: #ffffff;
+}
+
+#threadtable td{
+    padding-top: 12px;
+	padding-bottom: 12px;
+}
+
+#threadtable tr.alt td {
+    color: #000000;
+    background-color: #CACACA;
+}
+
+.message {
+	min-height: 40px;
+}
+
+.inputblock {
+	margin-top: 60px;
+	margin-bottom: 30px;
+	background-color: #EAEAEA;
+}
+
+.messagebox {
+	width: 50%;
+}

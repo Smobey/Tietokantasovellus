@@ -82,7 +82,7 @@ if($error == 1)
 	}
 
 	else
-	{
+	{    
 		$newuser = new User(); 
 		$newuser->setUsername(htmlspecialchars($username));
 		$newuser->setPassword($password);
@@ -90,8 +90,8 @@ if($error == 1)
 		
 		$newuser->toDatabase();
 		
-		$_SESSION['notification'] = "Registration successful! Feel free to log in.";
-		header('Location: index.php');
+		//$_SESSION['notification'] = "Registration successful! Feel free to log in.";
+		header('Location: index.php?r=true');
 	} 
 
 }

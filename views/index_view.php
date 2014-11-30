@@ -1,5 +1,8 @@
+<?php if($data->registered == 'true')
+echo 'Registration successful! Feel free to log in.<br><br>'; ?>
+
 <div class="menu">
-	<a>Create New Thread</a> | 
+	<?php if(isset($_SESSION['user'])) echo '<a href="createthread.php">Create New Thread</a> |'; ?>
 	<a>Change View</a> | 
 	<a href="userlist.php">User List</a>
 </div>
@@ -13,31 +16,59 @@
 		<th>Messages</th>
 		<th>Last Post</th>
 	  </tr>
-	  <tr>
-		<td>y helo thar</td>
-		<td>General</td> 
-		<td>Foo</td>
-		<td>2</td>
-		<td>9.11.2014</td>
-	  </tr>
-	  <tr>
-		<td><a href="thread.php?id=3">cat picture thread</a></td>
-		<td>General, Cats</td> 
-		<td>Catman</td>
-		<td>5</td>
-		<td>7.11.2014</td>
-	  </tr>
-	   <tr>
-		<td>gosh</td>
-		<td>General</td> 
-		<td><a href="userpage.php?id=2">BethanyM</a></td>
-		<td>1</td>
-		<td>7.11.2014</td>
-	  </tr>
+	<?php
+	if ($data->threads == null)
+	{
+		echo'
+		<tr>
+			<td>No threads to list!</td>
+			<td>-</td> 
+            <td>-</td> 
+            <td>-</td> 
+            <td>-</td> 
+		</tr>
+		';
+	}
+	else
+	{
+		foreach ($data->threads as $row)
+		{
+			$phpdate = strtotime($row['Lastpost']);
+			$mysqldate = date( 'd.m.Y H:m:s', $phpdate );
+			echo'
+			<tr>
+				<td><a href="showthread.php?id='.$row['ThreadID'].'">'.htmlspecialchars($row['Title']).'</a></td>
+                <td>'.$row['Tag1Name'].'</td>
+                <td><a href="userpage.php?id='.$row['Creator'].'">'.htmlspecialchars($row['Username']).'</a></td>
+                <td>'.$row['MessageCount'].'</td>
+				<td>'.$mysqldate.'</td> 
+			</tr>
+			';
+		}
+	}
+	?>
 	</table>
 </div>
 
 <div class="pageswitch">
-	Page 1 of 1<br>
-	<s>Previous Page</s> | <s>Next Page</s>
+	<?php
+	$totalpages = ceil(Thread::countThreads() / 20);
+	echo 'Page '.$data->page.' of '.$totalpages.'<br>';
+	if ($data->page == 1)
+	{
+		echo '<s>Previous Page</s> |';
+	}
+	else
+	{
+		echo '<a href="index.php?page='. ($data->page - 1) .'">Previous Page</a> |';
+	}
+	if ($data->page == $totalpages)
+	{
+		echo ' <s>Next Page</s>';
+	}
+	else
+	{
+		echo ' <a href="index.php?page='. ($data->page + 1) .'">Next Page</a>';
+	}
+	?>
 </div>
